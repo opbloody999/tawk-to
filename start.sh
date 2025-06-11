@@ -1,7 +1,10 @@
 #!/bin/bash
 
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+echo "!!! EXECUTING START.SH SCRIPT - DEPENDENCIES ARE BEING INSTALLED !!!"
+echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
 # 1. Install required system dependencies for Chrome
-echo "🔧 Installing system dependencies..."
 apt-get update && apt-get install -y \
     libglib2.0-0 \
     libnss3 \
