@@ -4,17 +4,17 @@
 set -e
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "!!! EXECUTING START.SH (v5) - ROBUST ERROR CHECKING !!!"
+echo "!!! EXECUTING START.SH (v6) - LIGHTWEIGHT CHROMIUM ATTEMPT !!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
 # 1. Fix the dpkg state
 echo "🔧 Running dpkg --configure -a to fix any broken package states..."
 dpkg --configure -a
 
-# 2. Update package list and install dependencies
+# 2. Update package list and install dependencies + lightweight chromium
 echo "🔧 Updating apt and installing dependencies..."
 apt-get update && apt-get install -y \
-    wget \
+    chromium-browser \
     libglib2.0-0 \
     libnss3 \
     libfontconfig1 \
@@ -38,19 +38,13 @@ apt-get update && apt-get install -y \
     libgbm1 \
     --no-install-recommends
 
-# 3. Download and Install Google Chrome
-echo "🔧 Downloading Google Chrome..."
-wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-echo "🔧 Installing Google Chrome from .deb file..."
-apt-get install -y ./google-chrome-stable_current_amd64.deb
 
-# 4. Verify Chrome installation
-echo "🔧 Verifying Google Chrome installation..."
-ls -l /usr/bin/google-chrome
+# 3. Verify Chrome installation
+echo "🔧 Verifying Chromium installation..."
+ls -l /usr/bin/chromium-browser
 
-echo "✅ Google Chrome installation verified."
-rm google-chrome-stable_current_amd64.deb
+echo "✅ Chromium installation verified."
 
-# 5. Start the Streamlit application
+# 4. Start the Streamlit application
 echo "🚀 Starting Streamlit app..."
 streamlit run app.py --server.port 8080 --server.address 0.0.0.0
