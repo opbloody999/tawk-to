@@ -1,10 +1,15 @@
 #!/bin/bash
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "!!! EXECUTING START.SH SCRIPT (v3) - INSTALLING DEPENDENCIES AND WGET !!!"
+echo "!!! EXECUTING START.SH (v4) - FIXING DPKG AND INSTALLING !!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
-# 1. Update package list and install dependencies, including wget
+# 1. Fix the dpkg state
+echo "🔧 Running dpkg --configure -a to fix any broken package states..."
+dpkg --configure -a
+
+# 2. Update package list and install dependencies, including wget
+echo "🔧 Updating apt and installing dependencies..."
 apt-get update && apt-get install -y \
     wget \
     libglib2.0-0 \
@@ -30,12 +35,12 @@ apt-get update && apt-get install -y \
     libgbm1 \
     --no-install-recommends
 
-# 2. Download and Install Google Chrome
+# 3. Download and Install Google Chrome
 echo "🔧 Downloading and Installing Google Chrome..."
 wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt-get install -y ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-# 3. Start the Streamlit application
+# 4. Start the Streamlit application
 echo "🚀 Starting Streamlit app..."
 streamlit run app.py --server.port 8080 --server.address 0.0.0.0
