@@ -23,7 +23,13 @@ def start_browser():
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    # Change this line to point to chromium-browser
+    
+    # --- Add these new stability options ---
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920x1080")
+    # ------------------------------------
+
+    # This should point to chromium-browser from our last change
     options.binary_location = "/usr/bin/chromium-browser" 
     
     service = Service(ChromeDriverManager().install())
