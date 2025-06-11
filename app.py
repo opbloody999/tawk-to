@@ -1,3 +1,4 @@
+# opbloody999/tawk-to/tawk-to-d2f4b5e1baebf4730587fb5b6e574f07b47967ce/app.py
 
 import streamlit as st
 import os, pickle, time
@@ -14,14 +15,21 @@ COOKIES = "tawk_cookies.pkl"
 st.set_page_config(page_title="Tawk.to Editor", layout="centered")
 st.title("🛠️ Tawk.to Channel Description Editor")
 
+# --- MODIFICATION IS HERE ---
 @st.cache_resource
 def start_browser():
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.binary_location = "/usr/bin/chromium-browser"
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    # Point to the correct binary location for Google Chrome
+    options.binary_location = "/usr/bin/google-chrome"
+    
+    # webdriver-manager will now find the compatible driver for the installed Chrome
+    service = Service(ChromeDriverManager().install())
+    
+    return webdriver.Chrome(service=service, options=options)
+# --- END OF MODIFICATION ---
 
 def login_and_save(driver, email, password):
     driver.get("https://dashboard.tawk.to/login")
