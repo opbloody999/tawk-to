@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Install Chrome
+apt-get update && apt-get install -y chromium chromium-driver
 echo "🔧 Installing Chrome..."
 wget -q -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt-get update
