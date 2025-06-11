@@ -15,14 +15,16 @@ COOKIES = "tawk_cookies.pkl"
 st.set_page_config(page_title="Tawk.to Editor", layout="centered")
 st.title("🛠️ Tawk.to Channel Description Editor")
 
+# In app.py
+
 @st.cache_resource
 def start_browser():
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    # Point to the correct binary location for Google Chrome
-    options.binary_location = "/usr/bin/google-chrome"
+    # Change this line to point to chromium-browser
+    options.binary_location = "/usr/bin/chromium-browser" 
     
     service = Service(ChromeDriverManager().install())
     
