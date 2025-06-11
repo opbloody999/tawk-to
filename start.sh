@@ -1,14 +1,14 @@
 #!/bin/bash
 
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-echo "!!! EXECUTING START.SH SCRIPT - DEPENDENCIES ARE BEING INSTALLED !!!"
+echo "!!! EXECUTING START.SH SCRIPT (v3) - INSTALLING DEPENDENCIES AND WGET !!!"
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
 
-# 1. Install required system dependencies for Chrome
+# 1. Update package list and install dependencies, including wget
 apt-get update && apt-get install -y \
+    wget \
     libglib2.0-0 \
     libnss3 \
-    libgconf-2-4 \
     libfontconfig1 \
     libx11-6 \
     libx11-xcb1 \
@@ -23,7 +23,6 @@ apt-get update && apt-get install -y \
     libxrender1 \
     libxss1 \
     libxtst6 \
-    libasound2 \
     libcups2 \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
@@ -31,8 +30,8 @@ apt-get update && apt-get install -y \
     libgbm1 \
     --no-install-recommends
 
-# 2. Install Google Chrome Stable
-echo "🔧 Installing Google Chrome..."
+# 2. Download and Install Google Chrome
+echo "🔧 Downloading and Installing Google Chrome..."
 wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 apt-get install -y ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
